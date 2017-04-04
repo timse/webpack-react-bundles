@@ -6,8 +6,7 @@ const wc = require('webpack-config');
 
 module.exports = new wc.Config().merge({
     entry: {
-        lodash: 'lodash',
-        moment: 'moment',
+        'lodash+moment': ['lodash', 'moment'],
         app: [
             'react-hot-loader/patch',
             // activate HMR for React

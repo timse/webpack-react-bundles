@@ -24,24 +24,13 @@ module.exports = new wc.Config().extend('conf/webpack.base.config.js').merge({
         // put lodash and moment in one file
         new webpack.optimize.CommonsChunkPlugin({
             name: 'lodash+moment',
-            minChunks: function (module) {
-                let result = module.context && _.reduce(['lodash', 'moment'], (result, record) => result || _(module.context).includes(`node_modules/${record}`), false);
-                if (result) {
-                    console.log('+++', module.context);
-                }
-                return result;
-            }
+            chunks: ['lodash+moment']
         }),
         // put everything else in the other file
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
             minChunks: function (module) {
-                let result = module.context && _(module.context).includes(`node_modules`) && !_.reduce(['lodash', 'moment'], (result, record) => result || _(module.context).includes(`node_modules/${record}`), false);
-                console.log('attempt', module.context);
-                if (result) {
-                    console.log('---', module.context);
-                }
-                return result;
+                return module.context && _(module.context).includes(`node_modules`);
             }
         })
     ]
