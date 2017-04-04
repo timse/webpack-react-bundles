@@ -12,5 +12,5 @@ In case server is run, you can just update the files - webpack tracks your chang
 
 ### To build the project:
 ```
-npm run build
+NODE_ENV=production npm run build
 ```
